@@ -16,7 +16,8 @@ ROLE_CHOICES = (
     ('Ride Giver', 'RIDE GIVER')
 )
 
-class CustomUser(AbstractUser):
+class SwiftUser(AbstractUser):
+    username = models.CharField(max_length=40,unique=True)
     email = models.EmailField(max_length=254)
     phone = models.CharField(max_length=15)
     age = models.PositiveIntegerField(null=True, blank=True)
@@ -26,7 +27,7 @@ class CustomUser(AbstractUser):
     profile_pic = models.ImageField(upload_to='profile_pics/')
     license_pic = models.ImageField(upload_to='license_pics/')
     collegeName = models.CharField(max_length=100, choices=COLLEGE_CHOICES)
-
+    location = models.JSONField()
 
 class Ride(models.Model):
     rideid = models.IntegerField()

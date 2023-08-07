@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser,Ride
+from .models import SwiftUser,Ride
 # Register your models here.
-admin.site.register(CustomUser)
+admin.site.register(SwiftUser)
 admin.site.register(Ride)

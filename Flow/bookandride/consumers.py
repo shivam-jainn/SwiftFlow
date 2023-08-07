@@ -4,7 +4,7 @@ from djangochannelsrestframework.mixins import CreateModelMixin
 
 from .serializers import RideSerializer
 from .models import Ride,Message
-from registerform.models import CustomUser
+from registerform.models import SwiftUser
 import json
 
 class flowConsumer(CreateModelMixin,AsyncAPIConsumer):
@@ -58,8 +58,8 @@ class flowConsumer(CreateModelMixin,AsyncAPIConsumer):
 
         try:
             room = Ride.objects.get(id=room_id)
-            sender = CustomUser.objects.get(id=sender_id)
-            receiver = CustomUser.objects.get(id=receiver_id)
+            sender = SwiftUser.objects.get(id=sender_id)
+            receiver = SwiftUser.objects.get(id=receiver_id)
 
             message = Message.objects.create(
                 room=room,
@@ -81,14 +81,14 @@ class flowConsumer(CreateModelMixin,AsyncAPIConsumer):
                 }
             })
 
-        except (Ride.DoesNotExist, CustomUser.DoesNotExist):
+        except (Ride.DoesNotExist, SwiftUser.DoesNotExist):
             pass
 
 
     @action
     def handle_show_drivers(self, data):
         collegeName = data.get('collegeName')
-        users = CustomUser.objects.filter(collegeName=collegeName)
+        users = SwiftUser.objects.filter(collegeName=collegeName)
 
         self.send_group_message({
             'type': 'show_drivers',

@@ -1,10 +1,10 @@
 from django import forms
-from .models import CustomUser,ROLE_CHOICES
+from .models import SwiftUser,ROLE_CHOICES
 
 class SignUpForm(forms.ModelForm):
 
     class Meta:
-        model = CustomUser
+        model = SwiftUser
         fields = [
             'username',
             'email',
@@ -23,7 +23,7 @@ class SignUpForm(forms.ModelForm):
 
 class LogInForm(forms.ModelForm):
     class Meta:
-        model = CustomUser
+        model = SwiftUser
         fields = [
             'email',       
             'password',            
@@ -33,5 +33,5 @@ class LogInForm(forms.ModelForm):
 
 class ProfilePicForm(forms.ModelForm):
     class Meta:
-        model = CustomUser
+        model = SwiftUser
         fields = ['profile_pic']

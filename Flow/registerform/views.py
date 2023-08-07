@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .forms import SignUpForm,LogInForm,ProfilePicForm
-from .models import CustomUser,Ride
+from .models import SwiftUser,Ride
 from django.contrib.auth.views import LoginView
 from .backends import EmailBackend
 from django.contrib.auth.hashers import make_password

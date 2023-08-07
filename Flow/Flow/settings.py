@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-AUTH_USER_MODEL = "registerform.CustomUser"
+AUTH_USER_MODEL = "registerform.SwiftUser"
 WSGI_APPLICATION = 'Flow.wsgi.application'
 ASGI_APPLICATION = 'Flow.asgi.application'
 
