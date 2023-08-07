@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .profile-pic {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .profile-pic img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 50%;
+            margin-top: 10px;
+            transition: filter 0.3s;
+        }
+
+        .edit-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #fff;
+            background-color: #555;
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        img{
+            max-width: 300px;
+            max-height: 300px;
+        }
+
+        .profile-pic:hover img {
+            filter: blur(2px);
+        }
+
+        .profile-pic:hover .edit-icon {
+            opacity: 1;
+        }
+
+        .user-info p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .user-info p:first-child {
+            font-weight: bold;
+        }
+
+        .no-pic {
+            color: #888;
+            text-align: center;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 400px;
+            border-radius: 5px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* File Upload Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form input[type="file"] {
+            margin: 10px 0;
+        }
+
+        form button {
+            background-color: #555;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+        <div class="user-info">
+            <p>Email: {{ user.email }}</p>
+            <p>Phone: {{ user.phone }}</p>
+            <p>Age: {{ user.age }}</p>
+            <p>Gender: {{ user.get_gender_display }}</p>
+            <p>Role: {{ user.get_role_display }}</p>
+        </div>
+
+        <!-- College ID Picture -->
+        {% if user.collegeID %}
+            <p>College ID Picture:</p>
+            <img src="{{ user.collegeID.url }}" alt="College ID">
+        {% else %}
+            <p>No College ID Picture Uploaded</p>
+        {% endif %}
+
+        <!-- Profile Picture -->
+        <div class="profile-pic">
+            {% if user.profile_pic %}
+                <img src="{{ user.profile_pic.url }}" alt="Profile Picture">
+            {% else %}
+                <p class="no-pic">No Profile Picture Uploaded</p>
+            {% endif %}
+            <div class="edit-icon" onclick="openModal()">&#9998;</div>
+        </div>
+
+        <!-- License Picture -->
+        {% if user.license_pic %}
+            <p>License Picture:</p>
+            <img src="{{ user.license_pic.url }}" alt="License Picture">
+        {% else %}
+            <p>No License Picture Uploaded</p>
+        {% endif %}
+    </div>
+
+    <!-- Modal HTML -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Upload Profile Picture</h2>
+            <form id="uploadForm" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="profile_pic" accept="image/*" required>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById("uploadModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("uploadModal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
