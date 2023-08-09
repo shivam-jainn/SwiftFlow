@@ -1,0 +1,3 @@
+ name , email , password , phonenum , role , dob , gender, id card pic, display pic , home location , college , referral
+
+                                                                                                                                                                                                         o                                                                                                                                                                                                                                                                                                                               ove are the fields  for                                                                               

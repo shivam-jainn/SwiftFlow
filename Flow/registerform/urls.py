@@ -12,4 +12,4 @@ urlpatterns = [
     path('user/profile/', views.user_profile, name='user_profile'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+                                                               

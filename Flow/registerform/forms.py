@@ -1,5 +1,5 @@
 from django import forms
-from .models import SwiftUser,ROLE_CHOICES
+from .models import SwiftUser
 
 class SignUpForm(forms.ModelForm):
 
@@ -14,24 +14,25 @@ class SignUpForm(forms.ModelForm):
             'role',
             'collegeName',
             'collegeID',
-            'password',
+            'password',  # Include password field
             'profile_pic',
             'license_pic',
+            'location'
         ]
 
 
+                  
+from django.contrib.auth.forms import AuthenticationForm  
+                                                                                  
+class LogInForm(AuthenticationForm):
+    # Inherits from AuthenticationForm to handle login securely
 
-class LogInForm(forms.ModelForm):
     class Meta:
-        model = SwiftUser
-        fields = [
-            'email',       
-            'password',            
-        ]
-
-
-
+        model = SwiftUser               
+        fields = ['email']  # Include email for authentication
+                                              
 class ProfilePicForm(forms.ModelForm):
     class Meta:
         model = SwiftUser
         fields = ['profile_pic']
+                         
