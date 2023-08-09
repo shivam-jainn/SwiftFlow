@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'daphne',
+    'rest_framework',
+    'rest_framework.authtoken',
     'djangochannelsrestframework',
     'django.contrib.admin',
     'django.contrib.auth',
